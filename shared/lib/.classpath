@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="jars"/>
+	<classpathentry exported="true" kind="lib" path="jars/commons-io-2.8.0.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/shared/lib/docs/commons-io-2.8.0-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="jars/commons-lang3-3.12.0.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/shared/lib/docs/commons-lang3-3.12.0-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="jars/commons-text-1.9.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/shared/lib/docs/commons-text-1.9-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="jars/jsoup-1.13.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/shared/lib/docs/jsoup-1.13.1-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="jars/log4j-api-2.14.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/log4j-core-2.14.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/toolkit_0-1-0.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/shared/lib/docs/toolkit_0-1-0_javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="jars/picocli-4.6.2.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/shared/lib/docs/picocli-4.6.2-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="jars/picocli-codegen-4.6.2.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
