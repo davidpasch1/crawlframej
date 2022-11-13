@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="tests"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/jars/httpclient5-fluent-5.0.3.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="https://hc.apache.org/httpcomponents-client-5.0.x/current/httpclient5-fluent/apidocs/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/jars/httpcore5-5.0.2.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="https://hc.apache.org/httpcomponents-core-5.1.x/current/httpcore5/apidocs/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/jars/httpclient5-5.0.3.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="https://hc.apache.org/httpcomponents-client-5.0.x/current/httpclient5/apidocs/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/jars/commons-codec-1.13.jar"/>
+	<classpathentry kind="lib" path="lib/jars/slf4j-api-1.7.25.jar"/>
+	<classpathentry kind="lib" path="lib/jars/log4j-slf4j-impl-2.14.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/lib"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
