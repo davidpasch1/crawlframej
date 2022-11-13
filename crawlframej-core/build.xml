@@ -1,0 +1,18 @@
+<project name="crawlframej-core" default="dist">
+
+  <property name="version" value="0-2-0a"/>
+
+  <property name="shared" location="../shared"/>
+  <property name="sub_logging" location="../logging"/>
+
+  <property name="sub-lib" value="cp-sub-lib"/>
+  <path id="cp-sub-lib">
+    <fileset dir="${sub_logging}/dist/lib">
+      <include name="**/*.jar"/>
+    </fileset>
+  </path>
+
+
+  <import file="${shared}/build_script/build_project.xml"/>
+
+</project>
