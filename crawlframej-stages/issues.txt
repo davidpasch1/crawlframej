@@ -1,0 +1,14 @@
+issues
+======
+
+pipeline
+- passing of parameters to stages
+- conveying results between stages
+
+content_type
+- Plain pass-through: Support for plain transfer of data through framework, ie no modification of data is desired eg downloader.
+- Stage acceptance: Definition of an acceptance criterion for the data for processing by a particular stage
+- Normalized file extensions: Normalization of file extensions of the output files
+
+writer
+- mapping url to file path

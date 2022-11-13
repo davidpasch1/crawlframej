@@ -1,0 +1,26 @@
+<project name="crawlframej-stages" default="dist">
+
+  <property name="version" value="0-2-0a"/>
+
+  <property name="shared" location="../shared"/>
+  <property name="sub_logging" location="../logging"/>
+  <property name="sub_http" location="../httpclient"/>
+  <property name="sub_frame-core" location="../crawlframej-core"/>
+  
+  <property name="sub-lib" value="cp-sub-lib"/>
+  <path id="cp-sub-lib">
+    <fileset dir="${sub_logging}/dist/lib">
+      <include name="**/*.jar"/>
+    </fileset>
+    <fileset dir="${sub_http}/dist/lib">
+      <include name="**/*.jar"/>
+    </fileset>
+    <fileset dir="${sub_frame-core}/dist/lib">
+      <include name="**/*.jar"/>
+    </fileset>
+  </path>
+
+
+  <import file="${shared}/build_script/build_project.xml"/>
+
+</project>
