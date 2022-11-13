@@ -1,0 +1,128 @@
+<!-- 
+  Base build file for project builds.
+
+  David Pasch
+  All rights reserved.
+
+  Parameters:
+  - classpath of dependent projects: cp-sub-lib
+-->
+
+<project>
+
+  <property name="src" location="src"/>
+  <property name="tests" location="tests"/>
+  <property name="lib" location="lib"/>
+  <property name="build" location="build"/>
+  <property name="build_classes" location="build/classes"/>
+  <property name="build_doc" location="build/doc"/>
+  <property name="build_tests" location="build/tests"/>
+  <property name="dist" location="dist"/>
+  <property name="dist_lib" location="dist/lib"/>
+  <property name="dist_jar" value="${ant.project.name}_${version}.jar"/>
+  <property name="dist_doc" location="dist/doc"/>
+  <property name="dist_tests" location="dist/lib"/>
+  <property name="shared" location="../shared"/>
+  
+  <path id="cp-lib">
+    <fileset dir="${shared}/lib/jars">
+      <include name="**/*.jar"/>
+    </fileset>
+    <fileset dir="${lib}/jars">
+      <include name="**/*.jar"/>
+    </fileset>
+  </path>
+ 
+  <path id="cp-tests-lib">
+    <fileset dir="${shared}/lib/tests-jars">
+      <include name="**/*.jar"/>
+    </fileset>
+  </path>
+ 
+  <path id="cp-empty-lib"/>
+  <condition property="cp-x-lib" value="${sub-lib}" else="cp-empty-lib">
+    <isset property="sub-lib"/>
+  </condition> 
+
+
+  <target name="compile" description="compile source">
+
+    <mkdir dir="${build_classes}"/>
+    <!-- includeantruntime: prevent warning -->
+    <javac debug="true" debuglevel="lines,vars,source" srcdir="${src}" destdir="${build_classes}" includeantruntime="false">
+      <classpath refid="cp-lib"/>
+      <classpath refid="${cp-x-lib}"/>
+    </javac>
+
+  </target>
+
+
+  <target name="dist" depends="compile" description="generate jar">
+
+    <mkdir dir="${dist_lib}"/>
+    <jar jarfile="${dist_lib}/${dist_jar}" basedir="${build_classes}"/>
+
+  </target>
+
+
+  <target name="apidoc" description="generate api doc">
+
+    <mkdir dir="${build_doc}"/>
+    <javadoc sourcepath="${src}" destdir="${build_doc}">
+      <classpath refid="cp-lib"/>
+      <classpath refid="${cp-x-lib}"/>
+    </javadoc>
+
+  </target>
+
+
+  <target name="tests-compile" depends="dist" description="compile tests">
+
+    <mkdir dir="${build_tests}"/>
+    <!-- includeantruntime: prevent warning -->
+    <javac debug="true" debuglevel="lines,vars,source" srcdir="${tests}" destdir="${build_tests}" includeantruntime="false">
+      <classpath refid="cp-lib"/>
+      <classpath refid="cp-tests-lib"/>
+      <classpath refid="${cp-x-lib}"/>
+      <classpath location="${dist_lib}/${dist_jar}"/>
+    </javac>
+
+  </target>
+
+
+  <target name="tests" depends="tests-compile" description="run unit tests">
+
+    <!--
+      NOTE: attributes dir, fork nec, bec rel paths in java resolved against JVM's launch path and NOT against cwd!!!
+            basedir == pwd != System.getProperty("user.dir")
+    -->
+    <junit dir="${basedir}" fork="true">
+
+      <classpath refid="cp-lib"/>
+      <classpath refid="cp-tests-lib"/>
+      <classpath refid="${cp-x-lib}"/>
+      <classpath location="${dist_lib}/${dist_jar}"/>
+      <classpath location="${build_tests}"/>
+
+      <formatter type="brief" usefile="false" />
+
+      <batchtest todir="${dist_tests}">
+        <fileset dir="${tests}">
+          <include name="**/Test*.java"/>
+        </fileset>
+      </batchtest>
+
+    </junit>
+
+  </target>
+
+
+  <target name="clean" description="clean up">
+
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+
+  </target>
+
+
+</project>

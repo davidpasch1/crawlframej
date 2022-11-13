@@ -1,0 +1,10 @@
+<project name="crawlframej-logging" default="dist">
+
+  <property name="version" value="0-2-0a"/>
+
+  <property name="shared" location="../shared"/>
+
+
+  <import file="${shared}/build_script/build_project.xml"/>
+
+</project>
