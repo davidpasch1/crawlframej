@@ -1,6 +1,8 @@
 # crawlframej
 A simple framework for a web-crawler in Java.
 
+**Original author**: David Pasch
+
 ## Scope
 A framework that may serve as a foundation for a basic scraping tool or a focused web-crawler. As such it aims to be simple and comprehensive, but still powerful enough to support different application scenarios. It is not intended for a full-web search engine.
 
