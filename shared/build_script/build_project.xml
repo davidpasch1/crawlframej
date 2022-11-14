@@ -20,6 +20,7 @@
   <property name="dist" location="dist"/>
   <property name="dist_lib" location="dist/lib"/>
   <property name="dist_jar" value="${ant.project.name}_${version}.jar"/>
+  <property name="dist_doc_jar" value="${ant.project.name}_${version}_javadoc.jar"/>
   <property name="dist_doc" location="dist/doc"/>
   <property name="dist_tests" location="dist/lib"/>
   <property name="shared" location="../shared"/>
@@ -72,6 +73,14 @@
       <classpath refid="cp-lib"/>
       <classpath refid="${cp-x-lib}"/>
     </javadoc>
+
+  </target>
+
+
+  <target name="dist-apidoc" depends="apidoc" description="generate javadoc jar">
+
+    <mkdir dir="${dist_doc}"/>
+    <jar jarfile="${dist_doc}/${dist_doc_jar}" basedir="${build_doc}"/>
 
   </target>
 

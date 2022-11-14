@@ -1,0 +1,238 @@
+<!--
+  Main build file.
+  Invokes build files of individual projects.
+
+  Parameters:
+  - property version: version of artifacts
+  - env var CRAWLFJ: dst for archiving (see target desc)
+
+  David Pasch
+-->
+<project name="crawlframej" default="dist">
+
+  <property environment="env"/>
+
+  <!-- PARAMETER: version of artifacts -->
+  <property name="version" value="0-2-0a"/>
+
+  <property name="out_filename" value="${ant.project.name}_${version}"/>
+
+  <property name="conf_lib" location="conf_data/lib"/>
+  <property name="conf_lib_dist" location="conf_data/lib/dist"/>
+  <property name="conf_doc_overview" location="conf_data/doc/overview.html"/>
+
+  <property name="build" location="build"/>
+  <property name="build_doc" location="build/doc"/>
+
+  <property name="dist" location="dist"/>
+  <property name="dist_lib" location="dist/lib"/>
+  <property name="dist_lib_lib" location="dist/lib/lib"/>
+  <property name="dist_doc" location="dist/doc"/>
+
+  <property name="archive_lib" location="${env.CRAWLFJ}/lib"/>
+  <property name="archive_doc" location="${env.CRAWLFJ}/doc"/>
+  
+  <property name="shared" location="shared"/>
+  <property name="sub_http" location="httpclient"/>
+  <property name="sub_frame_core" location="crawlframej-core"/>
+  <property name="sub_frame_stages" location="crawlframej-stages"/>
+  <property name="sub_logging" location="logging"/>
+
+  <property name="sub_dist_lib" value="dist/lib"/>
+  <property name="sub_dist_doc" value="dist/doc"/>
+  <property name="sub_lib" value="lib/jars"/>
+
+
+  <path id="cp-shared-lib">
+    <fileset dir="${shared}/lib/jars">
+      <include name="**/*.jar"/>
+    </fileset>
+  </path>
+
+  <path id="cp-http-jars">
+    <fileset dir="${sub_http}/${sub_dist_lib}">
+      <include name="**/*.jar"/>
+    </fileset>
+    <fileset dir="${sub_http}/${sub_dist_doc}">
+      <include name="**/*.jar"/>
+    </fileset>
+  </path>
+  <path id="cp-http-lib">
+    <fileset dir="${sub_http}/${sub_lib}">
+      <include name="**/*.jar"/>
+    </fileset>
+  </path>
+
+  <path id="cp-frame-core-jars">
+    <fileset dir="${sub_frame_core}/${sub_dist_lib}">
+      <include name="**/*.jar"/>
+    </fileset>
+    <fileset dir="${sub_frame_core}/${sub_dist_doc}">
+      <include name="**/*.jar"/>
+    </fileset>
+  <path id="cp-frame-core-lib">
+  </path>
+    <fileset dir="${sub_frame_core}/${sub_lib}">
+      <include name="**/*.jar"/>
+    </fileset>
+  </path>
+
+  <path id="cp-frame-stages-jars">
+    <fileset dir="${sub_frame_stages}/${sub_dist_lib}">
+      <include name="**/*.jar"/>
+    </fileset>
+    <fileset dir="${sub_frame_stages}/${sub_dist_doc}">
+      <include name="**/*.jar"/>
+    </fileset>
+  </path>
+  <path id="cp-frame-stages-lib">
+    <fileset dir="${sub_frame_stages}/${sub_lib}">
+      <include name="**/*.jar"/>
+    </fileset>
+  </path>
+
+  <path id="cp-logging-jars">
+    <fileset dir="${sub_logging}/${sub_dist_lib}">
+      <include name="**/*.jar"/>
+    </fileset>
+    <fileset dir="${sub_logging}/${sub_dist_doc}">
+      <include name="**/*.jar"/>
+    </fileset>
+  </path>
+  <path id="cp-logging-lib">
+    <fileset dir="${sub_logging}/${sub_lib}">
+      <include name="**/*.jar"/>
+    </fileset>
+  </path>
+
+
+  <target name="antAll">
+    
+    <ant dir="${sub_logging}"  target="${ant_target}" inheritAll="false"/>
+    <ant dir="${sub_http}"    target="${ant_target}" inheritAll="false"/>
+    <ant dir="${sub_frame_core}"   target="${ant_target}" inheritAll="false"/>
+    <ant dir="${sub_frame_stages}"   target="${ant_target}" inheritAll="false"/>
+
+  </target>
+
+
+  <target name="compileAll" description="compile all sub-projects">
+
+    <antcall target="antAll">
+      <param name="ant_target" value="dist"/>
+    </antcall>
+
+  </target>
+
+
+  <target name="apidocAll" description="API docs of all sub-projects">
+
+    <antcall target="antAll">
+      <param name="ant_target" value="dist-apidoc"/>
+    </antcall>
+
+  </target>
+
+
+ <target name="dist" description="assemble application" depends="compileAll, apidocAll">
+ 
+    <copy todir="${dist_lib}">
+      <path refid="cp-logging-jars"/>
+      <path refid="cp-http-jars"/>
+      <path refid="cp-frame-core-jars"/>
+      <path refid="cp-frame-stages-jars"/>
+      <path refid="cp-shared-lib"/>
+      <path refid="cp-logging-lib"/>
+      <path refid="cp-http-lib"/>
+      <path refid="cp-frame-core-lib"/>
+      <path refid="cp-frame-stages-lib"/>
+    </copy>
+
+  </target>
+ 
+ 
+  <target name="testsAll" description="run unit tests of all sub-projects" depends="compileAll">
+
+    <antcall target="antAll">
+      <param name="ant_target" value="tests"/>
+    </antcall>
+
+  </target>
+ 
+ 
+  <target name="archive-init">
+
+    <fail message="Environment variable CRAWLFJ not set." unless="env.CRAWLFJ" />
+ 
+  </target>
+ 
+ 
+  <target name="archive-lib" depends="archive-init" description="archive program; req env var CRAWLFJ">
+
+    <mkdir dir="${archive_lib}"/>
+    <tar destfile="${archive_lib}/${out_filename}.tgz" compression="gzip">
+      <fileset dir="${dist_lib}">
+        <include name="**/*.jar"/>
+      </fileset>
+    </tar>
+
+  </target>
+
+
+  <target name="dist-apidoc" description="generate api doc">
+
+    <mkdir dir="${dist_doc}"/>
+    <javadoc
+      destdir="${dist_doc}"
+      windowtitle="crawlframej"
+      Overview="${conf_doc_overview}">
+
+      <packageset dir="${sub_logging}/src" defaultexcludes="no" />
+      <packageset dir="${sub_http}/src" defaultexcludes="no" />
+      <packageset dir="${sub_frame_core}/src" defaultexcludes="no" />
+      <packageset dir="${sub_frame_stages}/src" defaultexcludes="no" />
+
+      <classpath refid="cp-shared-lib"/>
+      <classpath refid="cp-logging-lib"/>
+      <classpath refid="cp-http-lib"/>
+      <classpath refid="cp-frame-core-lib"/>
+      <classpath refid="cp-frame-stages-lib"/>
+
+    </javadoc>
+
+  </target>
+
+
+  <target name="archive-apidoc" depends="archive-init" description="archive doc jar; req env var RPICK_ARCHIVE">
+
+    <mkdir dir="${archive_doc}"/>
+    <tar destfile="${archive_doc}/${out_filename}_javadoc.tgz" compression="gzip" basedir="${dist_doc}"/>
+
+  </target>
+
+
+  <target name="clean" description="clean up">
+
+    <delete dir="${dist}"/>
+
+  </target>
+
+
+  <target name="cleanAll" description="clean up project including all sub-projects" depends="clean">
+
+    <antcall target="antAll">
+      <param name="ant_target" value="clean"/>
+    </antcall>
+
+  </target>
+
+
+  <target name="test" description="something">
+
+    <echo message="${java.io.tmpdir}" />
+
+    <echo message="${env.CRAWLFJ}" />
+
+  </target>
+
+</project>
