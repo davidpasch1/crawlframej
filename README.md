@@ -51,6 +51,15 @@ Targets are provided for
 - running the unit tests
 - building the API docs
 
+The framework consists of two parts:
+- the core framework
+- the implementation of the framework (stages)
+
+The core framework contains the interfaces and abstract classes of the framework.
+It depends solely on the logging module, and can be thus used in scenarios where a minimal dependency on 3rd party libraries is desired.
+
+The provided framework implementation contains default implementations and demo programs.
+
 ## Documentation
 Check-out the API documentation.
 
@@ -65,3 +74,5 @@ The following libraries are being referenced by the project:
 The following libraries are only used for running the unit tests:
 - *junit*: Eclipse Public License 1.0
 - *hamcrest*: BSD License 3
+
+**Note**: Take a look at the build scripts of the individual projects for dependencies on 3rd party libraries.
