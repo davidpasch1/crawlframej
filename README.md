@@ -1,10 +1,14 @@
 # crawlframej
-A simple framework for a web-crawler in Java.
+A simple framework for a focused web-crawler in Java.
+
+The framework has been successfully used to build a focused web-crawler for a major blogging site.
 
 **Original author**: David Pasch
 
 ## Scope
-A framework that may serve as a foundation for a basic scraping tool or a focused web-crawler. As such it aims to be simple and comprehensive, but still powerful enough to support different application scenarios. It is not intended for a full-web search engine.
+A framework that may serve as a foundation for a basic scraping tool or a focused web-crawler. As such it aims to be simple and comprehensive, but still powerful enough to support different application scenarios. *It is not intended for a full-web search engine.*
+
+Because it is intended for simple web-crawlers, it's performance is not an important issue. In real application, the framework has been used so far to download up to 10,000 pages. *It is not intended to be used for 24/7 operation.*
 
 **Note**: Fetched data is handed out by the framework as-is. Consequently, the implementor of the framework must take care of any necessary cleaning of the data (eg invalid characters in HTML).
 
@@ -15,6 +19,7 @@ A framework that may serve as a foundation for a basic scraping tool or a focuse
 - *The disk writer stage always outputs page as UTF-8 regardless of the original encoding.*
 - *The framework has not been tested with non-ASCII URLs.* Note, that according to the standard for URLs (RFC1738) non-ASCII URLs are invalid. However, the framework should work with URLs that were originally non-ASCII and have been encoded to ASCII according to the standard.
 - *The crawl delay is fixed.* That's because it is a simple solution and there is not much gain in making it adaptive.
+- *The `robots.txt` file is not processed.* This is left to the implementor of the framework.
 
 ## Features
 
@@ -34,6 +39,20 @@ A framework that may serve as a foundation for a basic scraping tool or a focuse
 - Collection of stages for the fetcher and the processing pipeline.
 - Demo of a general crawler and a downloader.
 
+The framework is delivered in two modules:
+- the core framework (`crawlframej-core`)
+- the implementation of the framework (`crawlframej-stages`)
+
+The core framework contains the interfaces and abstract classes of the framework.
+It depends solely on the logging module, and can be thus used in scenarios where a minimal dependency on 3rd party libraries is desired.
+
+The provided framework implementation contains default implementations for various stages:
+- HTTP web fetcher
+- disk fetcher
+- disk writer
+- job generator
+
+The library `crawlframej-stages` also contains the demo programs.
 
 ## Requirements
 For running the project the following requirements have to be met:
@@ -51,24 +70,25 @@ Targets are provided for
 - running the unit tests
 - building the API docs
 
-The framework consists of two parts:
-- the core framework
-- the implementation of the framework (stages)
+You may want to try out the provided demo programs in the `crawlframej-stages` module.
+Check-out the API documentation of the module for more information.
 
-The core framework contains the interfaces and abstract classes of the framework.
-It depends solely on the logging module, and can be thus used in scenarios where a minimal dependency on 3rd party libraries is desired.
-
-The provided framework implementation contains default implementations and demo programs.
+For a complete web-crawler, an implementor of the framework will usually have to provide the following:
+- a parser stage for the downloaded web-pages
+- a crawling strategy to direct the crawl and to filter URLs eg due to the `robots.txt`
+- common utilites which are currently not included by the default implementation like a parser for sitemaps and for the `robots.txt`
 
 ## Documentation
 Check-out the API documentation.
 
 ## Licenses
-The following libraries are being referenced by the project:
-- *jsoup*: MIT license
+The following libraries are being referenced by the core framework `crawlframej-core`:
 - *log4j*: Apache 2.0
 - *commons-\**: Apache 2.0
 - *javatuples*: Apache 2.0
+
+The default implementation `crawlframej-stages` further needs the following libraries:
+- *jsoup*: MIT license
 - *httpclient*: Apache 2.0
 
 The following libraries are only used for running the unit tests:
