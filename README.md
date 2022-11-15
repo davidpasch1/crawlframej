@@ -86,6 +86,7 @@ The following libraries are being referenced by the core framework `crawlframej-
 - *log4j*: Apache 2.0
 - *commons-\**: Apache 2.0
 - *javatuples*: Apache 2.0
+- *toolkit*: David Pasch, Apache 2.0
 
 The default implementation `crawlframej-stages` further needs the following libraries:
 - *jsoup*: MIT license
