@@ -84,13 +84,17 @@ Targets are provided for
 You may want to try out the provided demo programs in the `crawlframej-stages` module.
 Check-out the API documentation of the module for more information.
 
+You can also take a look at the system specification for inspiring your own web-crawler.
+
 For a complete web-crawler, an implementor of the framework will usually have to provide the following:
 - a parser stage for the downloaded web-pages
 - a crawling strategy to direct the crawl and to filter URLs eg due to the `robots.txt`
 - common utilites which are currently not included by the default implementation like a parser for sitemaps and for the `robots.txt`
 
 ## Documentation
-Check-out the API documentation.
+The following system documentation is provided:
+- API documentation
+- System specification (included with the code)
 
 ## Licenses
 The following libraries are being referenced by the core framework `crawlframej-core`:
@@ -107,4 +111,4 @@ The following libraries are only used for running the unit tests:
 - *junit*: Eclipse Public License 1.0
 - *hamcrest*: BSD License 3
 
-**Note**: Take a look at the build scripts of the individual projects for dependencies on 3rd party libraries.
+**Note**: Take a look at the build scripts of the individual projects for inter-module dependencies.
