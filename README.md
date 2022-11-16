@@ -5,6 +5,16 @@ The framework has been successfully used to build a focused web-crawler for a ma
 
 **Original author**: David Pasch
 
+## Code Maintenance
+The code is provided as-is to other developers for use in their projects.
+
+*In general, there are no plans to further extend the framework.*
+In particular, it is unlikely that the known limitations (sb) will be removed.
+
+There might be shortcomings, however, which may be subject to future development (see the wiki).
+
+**Note**: Bug reports and fixes are always welcome.
+
 ## Scope
 A framework that may serve as a foundation for a basic scraping tool or a focused web-crawler. As such it aims to be simple and comprehensive, but still powerful enough to support different application scenarios. *It is not intended for a full-web search engine.*
 
