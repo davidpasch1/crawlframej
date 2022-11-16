@@ -1,0 +1,18 @@
+/***********************************************
+ * Extra stylesheet for project documentation.
+ *
+ * David Pasch
+ * All rights reserved.
+ */
+
+
+/*******************************
+ * Styleing.
+ */
+
+/* Bug fix.
+ * Eg <>Fix:<>
+ */
+.fix {
+	font-weight: bold;
+}

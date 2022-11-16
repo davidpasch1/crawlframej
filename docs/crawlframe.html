@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	
+	<!-- no keywords tag, ignored by search engines -->
+	
+	<title>Crawling framework - Raisinpicker</title>
+	
+	<!-- appears in search results -->
+	<meta name="description" content=
+"Overview of the crawling framework." />
+	
+	<meta name="author" content="David Pasch"/>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>	
+
+	<link rel="stylesheet" href="styles/article.css"/>
+
+</head>
+
+
+<body>
+
+<!--
+  SYNC: this is the original source.
+  SYNC: update API docs.
+-->
+
+<h1>Crawling framework</h1>
+
+<p>A simple framework for a web-crawler.</p>
+
+
+<h2>Paradigm</h2>
+
+<p>Essentialism.</p>
+<p>Simplicity over features.</p>
+<p>Non-greedy approach to web-crawling.</p>
+
+
+<h2>Scope</h2>
+
+<p>A framework that may serve as a foundation for a basic scraping tool or a focused web-crawler. 
+As such it aims to be simple and comprehensive, but still powerful enough to support different 
+application scenarios. It is <em>not</em> intended for a full-web search engine.</p>
+
+<p><span class="def">Note:</span> Fetched data is handed out by the framework <em>as-is</em>.
+Consequently, the implementor of the framework must take care of any necessary cleaning of the data 
+(eg invalid characters in HTML).</p>
+ 
+
+<h2 id="Limitations">Limitations</h2>
+
+<ul>
+  <li><em>A crawl is limited to one website only.</em>
+      Of course, you can invoke the program multiple times to crawl several sites. 
+      The reason for this limitation is that the framework is intended for a focused web-crawler, and not for a full-web crawler.</li>
+  <li><em>The crawling framework has not been tested with non UTF-8 pages.</em></li>
+  <li><em>The disk writer stage always outputs page as UTF-8 regardless of the original encoding.</em></li>
+  <li><em>The framework has not been tested with non-ASCII URLs.</em>
+      Note, that according to the standard for URLs (<a href="https://www.ietf.org/rfc/rfc1738.txt">RFC1738</a>) non-ASCII URLs are invalid. 
+      However, the framework should work with URLs that were originally non-ASCII and have been encoded to ASCII according to the standard.</li>
+  <li><em>The crawl delay is fixed.</em>
+      That's because it is a simple solution and there is not much gain in making it adaptive.</li>
+</ul>
+
+
+<h2>Features</h2>
+
+<ul>
+  <li>Multithreaded design by running the fetching of webpages in a separate thread. As a consequence, the throughput is determined by the network communication.</li>
+  <li>Flexible pipeline structure through assembly of pipeline with stages.</li>
+  <li>Parameterization of stages wrt stage, job type, and job.</li>
+  <li>Accumulation of stage results during the processing of a job.</li>
+  <li>Custom error handling.</li>
+  <li>On error abortion of individual job or of entire crawl.</li>
+  <li>Complete error reporting through accumulation of exceptions throughout the pipeline.</li>
+  <li>Ready-to-use implementations of various stages for basic needs.</li>
+  <li>Sample code included for demo of framework.</li>
+</ul>
+
+
+<h2>Contents</h2>
+
+<ul>
+  <li>The core of the framework.</li>
+  <li>Collection of stages for the fetcher and the processing pipeline.</li>
+  <li>Demo of a general crawler and a downloader.</li>
+</ul>
+
+
+<h2>Requirements</h2>
+
+<ul>
+  <li>Java&nbsp;8</li>
+  <li>JUnit&nbsp;4</li>
+</ul>
+
+<!--
+
+<h1></h1>
+
+<p>David Pasch, 2020.</p>
+
+<p><b>Tags</b>: Devolution, Parents, Psychology, Egoism, Nietzsche</p>
+
+<p><b>SEO Description</b>:
+</p>
+<br/>
+
+<code></code>
+<em></em>
+<a href=""></a>
+<p></p>
+<p><b></b></p>
+<p><span class="def"></span></p>
+
+<figure>
+<img src="supplements/ego_women.png" alt="Self-centered women." />
+<figcaption>(photos by Jainner Giron and Eirc Mok)</figcaption>
+</figure>
+
+<h2>Glossary</h2>
+
+<dl>
+  <dt id="def:pipeline"><code>pipeline</code></dt>
+  <dd>Pipeline of the web-crawler incl classes it interacts with on top-layer.</dd>
+</dl>
+
+<h2>References</h2>
+
+<ul>
+ <li id="nietzscheGoetzen1889">Götzendämmerung (<a href="https://en.wikipedia.org/wiki/Twilight_of_the_Idols">Twilight of the Idols</a>). Friedrich Nietzsche, 1889.</li>
+</ul>
+
+-->
+
+</body>
+</html>

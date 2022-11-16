@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	
+	<!-- no keywords tag, ignored by search engines -->
+	
+	<title>Types - Crawl framework</title>
+	
+	<!-- appears in search results -->
+	<meta name="description" content=
+"Specification of the use of types in the web-crawler." />
+	
+	<meta name="author" content="David Pasch"/>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>	
+
+	<link rel="stylesheet" href="../styles/article.css"/>
+
+</head>
+
+<body>
+
+<h1>Types</h1>
+
+<p><span class="def">Problem:</span> Typing (Typisierung) of data that passes through the system.</p>
+<p><span class="def">Goals:</span></p>
+<ul>
+ <li><em>Flexibility of framework:</em> Pipeline is agnostic of processed data.</li>
+ <li><em>Type safety:</em> Implementation works on typed data.</li>
+</ul>
+
+
+<h2>Aspects</h2>
+<p>There are two aspects of the problem:</p>
+<ul>
+ <li>Type awareness</li>
+ <li>Data tasks</li>
+</ul>
+
+<p><em>Type awareness</em> throughout the system is as follows:</p>
+<ul>
+  <li><code>pipeline</code>: knows <em>no</em> types.</em>
+  <li><code>stage<sub>proc</sub></code>: knows <em>all</em> types,
+      ie framework's types and implementation types.</em>
+  <li><code>impl</code>: knows <em>only</em> implementation types.</em>
+</ul>
+
+<p>See 
+<a href="#def:pipeline"><code>pipeline</code></a>,
+<a href="#def:stage_proc"><code>stage<sub>proc</sub></code></a>,
+<a href="#def:impl"><code>impl</code></a>.
+</p>
+
+<p><em>Data tasks</em> determine the requirements for accessing the data.
+These are as follows:</p>
+<ul>
+  <li><code>pipeline</code>: just passes data around.</em>
+  <li><code>impl</code>: processes the data.</em>
+  <li><code>stage<sub>proc</sub></code>: passes data between framework and implementation.</em>
+</ul>
+
+
+<h2>Approach</h2>
+
+<p>Solution in layered architecture (see <a href="system_structure.html">System structure</a>):</p>
+<ul>
+  <li><code>pipeline</code>: Top-layer (abstract) agnostic of data.</li>
+  <li><code>stage<sub>proc</sub></code>: Intermediate-layer that implements framework.<li/>
+  <ul>
+    <li>Translates types between top-layer and implementation-layer.</li>
+    <li>Casts data to concrete type for implementation.</li>
+  </ul>
+  <li><code>impl</code>: Implementation-layer working with implementation types only.</li>
+  <ul>
+    <li>Agnostic of higher layers.</li>
+    <li>Validates data.</li>
+  </ul>
+</ul>
+
+
+<h2>System design</h2>
+
+<p>The use of types in the layered architecture is shown below.</p>
+<figure>
+<img src="media/types-layers.png" alt="Types in the layered architecture."
+  width="500" />
+<figcaption>Types in the layered architecture.</figcaption>
+</figure>
+
+<p>The fetched data is wrapped and un-wrapped into and from different types during its travel through the layers of the system.
+The types on the different layers satisfy the needs of that particular layer.</p>
+
+<p>Given that the top-layer does not process the data itself, it is passed as being of unkown type (<code>Object</code>).</p>
+
+<p>The stages on the middle-layer use their own type (<code>T_stage</code>) in order to handle the data (see <a href="types-middle_layer.html">Types on the Middle-layer</a>).</p>
+
+<p>The implementation-layer works with the actual type of the data (<code>T_impl</code>).</p>
+
+<p>An interaction diagram which illustrates the typed and the untyped part of the system is shown below.</p>
+<figure>
+<img src="media/types.png" alt="Types in the system."
+  width="500" />
+<figcaption>Types in the system.</figcaption>
+</figure>
+
+<p>The core part of the framework which is the top-layer of the system is agnostic of the data
+that is being processed by the pipeline, and thus treats the data as being of unkown type (<code>Object</code>).</p>
+
+<p>The processing stages of the pipeline (<code>stageProc</code>) which are the middle-layer of the system
+convert the input data into the concrete type needed for the implementation in order to work with the data.</p>
+
+<p>The implementation (<code>impl</code>) which is the bottom-layer of the system
+processes the data using its concrete type.</p>
+
+
+<h2>Glossary</h2>
+
+<dl>
+  <dt id="def:pipeline"><code>pipeline</code></dt>
+  <dd>Pipeline of the web-crawler incl classes it interacts with on top-layer.</dd>
+  <dt id="def:stage_proc"><code>stage<sub>proc</sub></code></dt>
+  <dd>Processing stage of pipeline.</dd>
+  <dt id="def:impl"><code>impl</code></dt>
+  <dd>Implementation classes.</dd>
+</dl>
+
+<!--
+,
+<br/>
+
+<p></p>
+<p><span class="def"></span></p>
+
+<ul>
+ <li></li>
+</ul>
+
+<figure>
+<img src="supplements/ego_women.png" alt="Self-centered women." />
+<figcaption>(photos by Jainner Giron and Eirc Mok)</figcaption>
+</figure>
+
+-->
+
+</body>
+</html>

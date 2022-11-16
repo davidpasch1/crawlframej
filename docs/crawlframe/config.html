@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	
+	<!-- no keywords tag, ignored by search engines -->
+	
+	<title>Configuration - Crawl framework</title>
+	
+	<!-- appears in search results -->
+	<meta name="description" content=
+"Configuration of the crawling framework." />
+	
+	<meta name="author" content="David Pasch"/>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>	
+
+	<link rel="stylesheet" href="../styles/article.css"/>
+
+</head>
+
+<body>
+
+<h1>Configuration</h1>
+
+<p>The configuration of the framework is done by</p>
+<ul>
+  <li>setting the parameters of the stages of the pipeline and</li>
+  <li>through the <code>CrawlerConfig</code> class which stores the global settings.</li>
+</ul>
+
+<p><span class="def">Important:</span> The <code>CrawlerConfig</code> class has to be initialized before the framework can be used.</p>
+
+
+<h2>Media Types</h2>
+
+<p>The framework needs to know the type of the fetched data for the following purposes.</p>
+<ul>
+  <li><em>Stage acceptance:</em> Definition of an acceptance criterion for the data for processing by a particular stage.</li>
+  <li><em>Normalized file extensions:</em> Normalization of file extensions of the output files.</li>
+</ul>
+
+<p>The problem is that the content's type is represented differently in the web and on the file system.
+For this purpose, Linux has a built-in mapping which translates between the two representations.
+The mapping is stored in the following files.</p>
+<pre>
+/etc/mime.types	# global MIME types file
+~/.mime.types		# optional user MIME types file: overrides the global one
+</pre>
+
+<p><span class="def">Note:</span> The mapping is a M:N relation between media types and file extensions.</p>
+
+<p>The <em>stage acceptance criterion</em> for the fetched data is based on it's media type or file extension 
+eg the webpage parser accepts <code>text/html</code> or <code>[.html, .htm]</code>.</p>
+
+<h3>Normalization of file extensions</h3>
+
+<p>The file extension of an output file is normalized by appending or replacing it's file extension by the default file extension for the media type 
+eg <code>text/html</code> is written as <code>.html</code>.</p>
+
+<p><span class="def">Note:</span> This feature has to be explicitly enabled when configuring the framework.</p>
+
+<p>For the default file extension the framework takes the first file extension in the MIME types file for the media type.
+By creating a local user MIME types file the user can change the default order of the file extensions in the global MIME types file.</p>
+
+<!--
+
+<h1></h1>
+
+<p></p>
+
+<p>David Pasch, 2020.</p>
+
+<p><b>Tags</b>: Devolution, Parents, Psychology, Egoism, Nietzsche</p>
+
+<p><b>SEO Description</b>:
+</p>
+<br/>
+
+<p></p>
+// non-breaking space
+&nbsp;
+<code></code>
+<em></em>
+<a href=""></a>
+<p><b></b></p>
+<p><span class="def"></span></p>
+<ul>
+  <li></li>
+</ul>
+
+<figure>
+<img src="supplements/ego_women.png" alt="Self-centered women." 
+  width="600"/>
+<figcaption>(photos by Jainner Giron and Eirc Mok)</figcaption>
+</figure>
+
+<h2>Glossary</h2>
+
+<dl>
+  <dt id="def:pipeline"><code>pipeline</code></dt>
+  <dd>Pipeline of the web-crawler incl classes it interacts with on top-layer.</dd>
+</dl>
+
+<h2>References</h2>
+
+<ul>
+ <li id="nietzscheGoetzen1889">Götzendämmerung (<a href="https://en.wikipedia.org/wiki/Twilight_of_the_Idols">Twilight of the Idols</a>). Friedrich Nietzsche, 1889.</li>
+</ul>
+
+-->
+
+</body>
+</html>

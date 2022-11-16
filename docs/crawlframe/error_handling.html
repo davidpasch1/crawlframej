@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	
+	<!-- no keywords tag, ignored by search engines -->
+	
+	<title>Error handling - Crawl framework</title>
+	
+	<!-- appears in search results -->
+	<meta name="description" content=
+"Specification of the error handling in the web-crawler." />
+	
+	<meta name="author" content="David Pasch"/>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>	
+
+	<link rel="stylesheet" href="../styles/article.css"/>
+
+</head>
+
+
+<body>
+
+
+<h1>Error handling</h1>
+
+
+<p>This document specifies the handling of errors in the web-crawler.</p>
+
+
+<h2>Cases</h2>
+
+<p>The following cases have to be differentiated:</p>
+<ul>
+ <li>Expected errors vs unexpected errors</li>
+ <li>Normal errors vs program errors (bugs)</li>
+</ul>
+
+<p><em>Expected errors</em> are errors that occur during normal operation of program, eg HTTP errors 404, 500.</p>
+<p><em>Unexpected errors</em> are errors for which there is currently no response in the program, eg <code>IllegalArgumentException</code>.</p>
+<p><em>Program errors</em> signalize an error in the program itself, eg an impossible branch taken.</p>
+
+
+<h2>Aspects</h2>
+
+<p>There are two aspects of the problem:</p>
+<ul>
+ <li>Tunneling of exceptions</li>
+ <li>Consumption of exceptions</li>
+</ul>
+
+<h3>Tunneling of exceptions</h3>
+<p><span class="def">Problem:</span> Convey exceptions from implementation-layer to the top-layer for consumption.</p>
+<p>A solution to the problem must not break the facade of the subsystem.</p>
+
+<h3>Consumption of exceptions</h3>
+<p>An exception is consumed by outputting information on the error to the terminal and to the log.</p>
+<ul>
+ <li><em>Expected error</em>: Concise, informative output only</li>
+ <li><em>Unexpected error</em>: Detailed output</li>
+ <li><em>Bug</em>: Detailed output</li>
+</ul>
+
+
+<h2>Implementation</h2>
+
+<h3>Representations of errors</h3>
+<p>The different types of errors are represented as follows:</p>
+<ul>
+ <li><em>Expected error</em>: <code>Exception</code></li>
+ <li><em>Unexpected error</em>: <code>RuntimeException</code></li>
+ <li><em>Bug</em>: <code>RuntimeException</code></li>
+</ul>
+
+<h3>Tunneling of exceptions</h3>
+<p><span class="def">Approach:</span> Use of <code>RuntimeException</code> as a separate tunnel for unexpected errors and program errors from bottom to top-layer.</p>
+<ul>
+ <li><em>Expected error</em>: Wrapping <code>Exception</code></li>
+ <li><em>Unexpected error</em>: <code>RuntimeException</code></li>
+ <li><em>Bug</em>: <code>RuntimeException</code></li>
+</ul>
+
+<h3>Consumption of exceptions</h3>
+<ul>
+ <li>Informative output: <code>toString()</code></li>
+ <li>Detailed output: Stacktrace</li>
+</ul>
+
+
+<h2>System design</h2>
+
+<figure>
+<img src="media/error_handling.png" alt="Error handling in web-crawler."
+  width="600" />
+<figcaption>Error handling in web-crawler.</figcaption>
+</figure>
+
+
+<!--
+
+<br/>
+
+<p></p>
+<p><em></em></p>
+
+<ul>
+ <li></li>
+</ul>
+
+<figure>
+<img src="supplements/ego_women.png" alt="Self-centered women." />
+<figcaption>(photos by Jainner Giron and Eirc Mok)</figcaption>
+</figure>
+
+-->
+
+</body>
+</html>

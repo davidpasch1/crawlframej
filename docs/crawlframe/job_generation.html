@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	
+	<!-- no keywords tag, ignored by search engines -->
+	
+	<title>Job generation - Crawl framework</title>
+	
+	<!-- appears in search results -->
+	<meta name="description" content=
+"Specification of the job generation in the web-crawler." />
+	
+	<meta name="author" content="David Pasch"/>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>	
+
+	<link rel="stylesheet" href="../styles/article.css"/>
+
+</head>
+
+
+<body>
+
+
+<h1>Job generation</h1>
+
+
+<p><span class="def">Problem:</span> Exploration of web and generation of jobs.</p>
+<p><span class="def">Goals:</span> Supports</p>
+<ul>
+  <li>Different strategies for exploring the web.</li>
+  <li>Different representation of jobs.</li>
+  <li>Simple pipeline without web exploration eg downloader, disk scanning parser.</li>
+</ul>
+
+
+<h2>Approach</h2>
+
+<p>Explicit, centralized representation of task in system:</p>
+<ul>
+  <li>Centralized logic for generation of jobs, directing crawl.</li>
+  <li>Strategy pattern.</li>
+</ul>
+
+
+<h2>Rationale</h2>
+
+<p>The benefits are:</p>
+<ul>
+  <li>Exchangeable crawling strategy for different application scenarios, strategies for web exploration.</li>
+  <li>By being the central point for job generation, all URLs pass here through.</br>
+ 	   This allows, for instance, for system-wide URL checking.</li>
+</ul>
+
+
+<h2>System design</h2>
+
+<p>The job generation in the web-crawler is shown below:</p>
+<figure>
+<img src="media/job_generation.png" alt="Job generation in the web-crawler."
+  width="600" />
+<figcaption>Job generation in the web-crawler.</figcaption>
+</figure>
+
+
+<h2>Glossary</h2>
+
+<dl>
+  <dt id="def:crawler"><code>crawler</code></dt>
+  <dd>Web-crawler class.</dd>
+  <dt id="def:fetcher"><code>fetcher</code></dt>
+  <dd>Fetching stage of the pipeline.</dd>
+  <dt id="def:parser"><code>parser</code></dt>
+  <dd>Parser stage of the pipeline.</dd>
+  <dt id="def:jobsgen"><code>jobsgen</code></dt>
+  <dd>Jobs generation stage of the pipeline.</dd>
+</dl>
+
+
+<!--
+
+
+<p>David Pasch, 2020.</p>
+
+<p><b>Tags</b>: Devolution, Parents, Psychology, Egoism, Nietzsche</p>
+
+<p><b>SEO Description</b>:
+</p>
+<br/>
+
+<p></p>
+<p><b></b></p>
+
+<figure>
+<img src="supplements/ego_women.png" alt="Self-centered women." />
+<figcaption>(photos by Jainner Giron and Eirc Mok)</figcaption>
+</figure>
+
+<h2>References</h2>
+
+<ul>
+ <li id="nietzscheGoetzen1889">Götzendämmerung (<a href="https://en.wikipedia.org/wiki/Twilight_of_the_Idols">Twilight of the Idols</a>). Friedrich Nietzsche, 1889.</li>
+ <li id="nietzscheWagner1888">Fall Wagner (<a href="https://en.wikipedia.org/wiki/The_Case_of_Wagner">The Case of Wagner</a>). Friedrich Nietzsche, 1888.</li>
+ <li id="nietzscheZara1883">Also sprach Zarathustra. (<a href="https://en.wikipedia.org/wiki/Thus_Spoke_Zarathustra">Thus Spoke Zarathustra</a>). Friedrich Nietzsche, 1883.</li>
+ <li id="nietzscheSchopen1874">Schopenhauer als Erzieher (Schopenhauer as Educator). Friedrich Nietzsche, 1874.</li>
+ <li id="franz1981">Der ewige Jüngling. Der Puer Aeternus und der kreative Genius im Erwachsenen. (The Problem of the Puer Aeternus). <a href="https://de.wikipedia.org/wiki/Marie-Louise_von_Franz">Marie-Louis von Franz</a>, 1981.</li>
+</ul>
+
+-->
+
+</body>
+</html>

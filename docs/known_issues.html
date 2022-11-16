@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	
+	<!-- no keywords tag, ignored by search engines -->
+	
+	<title>Known issues</title>
+	
+	<!-- appears in search results -->
+	<meta name="description" content=
+"Lists known issues with the crawling framework." />
+	
+	<meta name="author" content="David Pasch"/>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>	
+
+	<link rel="stylesheet" href="styles/article.css"/>
+
+</head>
+
+<body>
+
+<!--
+  SYNC: this is the original source.
+  SYNC: update program manual.
+-->
+
+<h1>Known issues</h1>
+
+<p>Issues with the current implementation which may be fixed in the future.</p>
+
+<ul>
+  <li><code>robotstxt</code>: The website's <code>robots.txt</code> is not being evaluated.
+      That's because Google, Bing handle it differently.<br/>
+      <span class="def">Note:</span> At least the DENY (and ALLOW) rules <em>must</em> be implemented for a publication of the crawling framework.<br/>
+      <span class="def">Note:</span> Google does not respect crawl-delay setting.</li>
+  <li><code>sitemap</code>: The sitemap parser is provisorical and can only parse sitemaps from disk.
+      That's because the standard for sitemaps is not adhered to by the websites.</li>
+  <li><code>nonutf8</code>: The original character encoding of a downloaded page is ignored by the framework.
+      Consequently, non-UTF-8 pages are written by the included disk writer as UTF-8.
+		<em>This is a limitation of the framework and will likely not be fixed (see <a href="crawlframe.html#Limitations">Limitations</a>).</em></li>
+  <li></li>
+</ul>
+
+
+<!--
+
+<h2></h2>
+
+<p></p>
+
+<p>David Pasch, 2020.</p>
+
+<p><b>Tags</b>: Devolution, Parents, Psychology, Egoism, Nietzsche</p>
+
+<p><b>SEO Description</b>:
+</p>
+<br/>
+
+<p></p>
+<code></code>
+<em></em>
+<a href=""></a>
+<p><b></b></p>
+<p><span class="def"></span></p>
+<ul>
+  <li></li>
+</ul>
+
+<figure>
+<img src="supplements/ego_women.png" alt="Self-centered women." />
+<figcaption>(photos by Jainner Giron and Eirc Mok)</figcaption>
+</figure>
+
+<h2>Glossary</h2>
+
+<dl>
+  <dt id="def:pipeline"><code>pipeline</code></dt>
+  <dd>Pipeline of the web-crawler incl classes it interacts with on top-layer.</dd>
+</dl>
+
+<h2>References</h2>
+
+<ul>
+ <li id="nietzscheGoetzen1889">Götzendämmerung (<a href="https://en.wikipedia.org/wiki/Twilight_of_the_Idols">Twilight of the Idols</a>). Friedrich Nietzsche, 1889.</li>
+</ul>
+
+-->
+
+</body>
+</html>

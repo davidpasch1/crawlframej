@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	
+	<!-- no keywords tag, ignored by search engines -->
+	
+	<title>System structure - Crawl framework</title>
+	
+	<!-- appears in search results -->
+	<meta name="description" content=
+"Specification of the system structure." />
+	
+	<meta name="author" content="David Pasch"/>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>	
+
+	<link rel="stylesheet" href="../styles/article.css"/>
+
+</head>
+
+
+<body>
+
+
+<h1>System structure</h1>
+
+<p>This document describes the system structure of the web-crawler.</p>
+
+
+<h2>Approach</h2>
+
+<p>A strict layered architecture, ie no bypassing of neighbouring layers is allowed.</p>
+
+
+<h2>Implementation</h2>
+
+<ul>
+  <li><em>Top-layer:</em> Contains the core framework with crawler, pipeline, jobs.</li>
+  <li><em>Middle-layer:</em> Consists of the stages of the pipeline which implement the framework using the bottom-layer.</li>
+  <li><em>Bottom-layer:</em> Implementation classes which are agnostic of the framework.</li>
+</ul>
+
+
+<h2>System design</h2>
+
+<p>The layers of the web-crawler are shown below:</p>
+<figure>
+<img src="media/layers.png" alt="Layers of the web-crawler."
+  width="800" />
+<figcaption>Layers of the web-crawler.</figcaption>
+</figure>
+
+
+<!--
+<h2>Glossary</h2>
+
+<dl>
+  <dt id="def:crawler"><code>crawler</code></dt>
+  <dd>Web-crawler class.</dd>
+  <dt id="def:fetcher"><code>fetcher</code></dt>
+  <dd>Fetching stage of the pipeline.</dd>
+  <dt id="def:parser"><code>parser</code></dt>
+  <dd>Parser stage of the pipeline.</dd>
+  <dt id="def:jobsgen"><code>jobsgen</code></dt>
+  <dd>Jobs generation stage of the pipeline.</dd>
+</dl>
+
+<p>David Pasch, 2020.</p>
+
+<p><b>Tags</b>: Devolution, Parents, Psychology, Egoism, Nietzsche</p>
+
+<p><b>SEO Description</b>:
+</p>
+<br/>
+
+<p></p>
+<p><b></b></p>
+
+<figure>
+<img src="supplements/ego_women.png" alt="Self-centered women." />
+<figcaption>(photos by Jainner Giron and Eirc Mok)</figcaption>
+</figure>
+
+<h2>References</h2>
+
+<ul>
+ <li id="nietzscheGoetzen1889">Götzendämmerung (<a href="https://en.wikipedia.org/wiki/Twilight_of_the_Idols">Twilight of the Idols</a>). Friedrich Nietzsche, 1889.</li>
+ <li id="nietzscheWagner1888">Fall Wagner (<a href="https://en.wikipedia.org/wiki/The_Case_of_Wagner">The Case of Wagner</a>). Friedrich Nietzsche, 1888.</li>
+ <li id="nietzscheZara1883">Also sprach Zarathustra. (<a href="https://en.wikipedia.org/wiki/Thus_Spoke_Zarathustra">Thus Spoke Zarathustra</a>). Friedrich Nietzsche, 1883.</li>
+ <li id="nietzscheSchopen1874">Schopenhauer als Erzieher (Schopenhauer as Educator). Friedrich Nietzsche, 1874.</li>
+ <li id="franz1981">Der ewige Jüngling. Der Puer Aeternus und der kreative Genius im Erwachsenen. (The Problem of the Puer Aeternus). <a href="https://de.wikipedia.org/wiki/Marie-Louise_von_Franz">Marie-Louis von Franz</a>, 1981.</li>
+</ul>
+
+-->
+
+</body>
+</html>

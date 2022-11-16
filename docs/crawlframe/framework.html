@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	
+	<!-- no keywords tag, ignored by search engines -->
+	
+	<title>Core framework - Crawl framework</title>
+	
+	<!-- appears in search results -->
+	<meta name="description" content=
+"Specification of the core crawling framework." />
+	
+	<meta name="author" content="David Pasch"/>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>	
+
+	<link rel="stylesheet" href="../styles/article.css"/>
+
+</head>
+
+
+<body>
+
+
+<h1>Core framework</h1>
+
+<p>This document describes the core of the crawling framework which is implemented by the web-crawler.</p>
+
+
+<h2>System design</h2>
+
+<p>The interfaces of the crawling framework are shown below:</p>
+<figure>
+<img src="media/framework.png" alt="Crawling framework."
+  width="600" />
+<figcaption>Crawling framework.</figcaption>
+</figure>
+
+<p>The <code>CrawlerBase</code> is the base class for a crawler implementation.
+Its method <code>crawlJobs()</code> starts the pipeline.</p>
+
+<p>The <code>CrawlerPipeline</code> implements the crawler pipeline.
+Its method <code>processJobs()</code> processes the crawl jobs which it retrieves from the crawling strategy 
+(see <a href="job_generation.html">Job generation</a> regarding the generation of jobs in the framework).</p>
+
+<p>The pipeline is comprised by a fetching stage (<code>FetchingStageBase</code>) and processing stages (<code>ProcessingStageBase</code>).
+The processing stages are organized as a tree (DAG).</p>
+
+<p>The fetching stage may run in a separate thread, that's why it has to be started explicitly (see <a href="#sec:multi_threading">Multi-threading</a>).
+The pipeline feeds crawl jobs to the fetching stage and retrieves the results of the fetched jobs.</p>
+
+<p>The processing stages process the fetched data and store the result in the associated job.</p>
+
+<p>The <code>CrawlJob</code> represents a crawl job in the pipeline.
+It encapsulates the URL of a web resource that is to be fetched.
+It acts as a token that travels through the stages of the pipeline, storing the results of the stages.</p>
+
+
+<h2 id="sec:multi_threading">Multi-threading</h2>
+
+<p>The fetcher of the crawler pipeline runs in a separate thread.
+That way, the throughput of the crawler is determined by the time taken to fetch the resources.</p>
+
+<p>The interaction between the fetcher and the pipeline is shown below:</p>
+<figure>
+<img src="media/framework_parallel.png" alt="Multi-threading in the crawling framework."
+  width="500" />
+<figcaption>Multi-threading in the crawling framework.</figcaption>
+</figure>
+
+<p>The pipeline runs in the main thread.
+It supplies the fetcher with intial crawl jobs and waits then for the first fetched job for processing.
+In the course of the processing, new jobs may be generated which are then added to the fetcher's queue.</p>
+
+<p>The fetcher runs in a separate thread.
+It takes the next crawl job from its queue and fetches the associated resource.
+The result is added to the result queue for consumption by the pipeline.
+In the case of fetching from the web, every fetch is followed by a delay in order to respect the politeness policy of the website.</p>
+
+<!--
+<h2>Glossary</h2>
+
+<dl>
+  <dt id="def:crawler"><code>crawler</code></dt>
+  <dd>Web-crawler class.</dd>
+  <dt id="def:fetcher"><code>fetcher</code></dt>
+  <dd>Fetching stage of the pipeline.</dd>
+  <dt id="def:parser"><code>parser</code></dt>
+  <dd>Parser stage of the pipeline.</dd>
+  <dt id="def:jobsgen"><code>jobsgen</code></dt>
+  <dd>Jobs generation stage of the pipeline.</dd>
+</dl>
+
+<p>David Pasch, 2020.</p>
+
+<p><b>Tags</b>: Devolution, Parents, Psychology, Egoism, Nietzsche</p>
+
+<p><b>SEO Description</b>:
+</p>
+<br/>
+
+<p></p>
+<p><b></b></p>
+
+<figure>
+<img src="supplements/ego_women.png" alt="Self-centered women." />
+<figcaption>(photos by Jainner Giron and Eirc Mok)</figcaption>
+</figure>
+
+<h2>References</h2>
+
+<ul>
+ <li id="nietzscheGoetzen1889">Götzendämmerung (<a href="https://en.wikipedia.org/wiki/Twilight_of_the_Idols">Twilight of the Idols</a>). Friedrich Nietzsche, 1889.</li>
+ <li id="nietzscheWagner1888">Fall Wagner (<a href="https://en.wikipedia.org/wiki/The_Case_of_Wagner">The Case of Wagner</a>). Friedrich Nietzsche, 1888.</li>
+ <li id="nietzscheZara1883">Also sprach Zarathustra. (<a href="https://en.wikipedia.org/wiki/Thus_Spoke_Zarathustra">Thus Spoke Zarathustra</a>). Friedrich Nietzsche, 1883.</li>
+ <li id="nietzscheSchopen1874">Schopenhauer als Erzieher (Schopenhauer as Educator). Friedrich Nietzsche, 1874.</li>
+ <li id="franz1981">Der ewige Jüngling. Der Puer Aeternus und der kreative Genius im Erwachsenen. (The Problem of the Puer Aeternus). <a href="https://de.wikipedia.org/wiki/Marie-Louise_von_Franz">Marie-Louis von Franz</a>, 1981.</li>
+</ul>
+
+-->
+
+</body>
+</html>

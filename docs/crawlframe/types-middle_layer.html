@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	
+	<!-- no keywords tag, ignored by search engines -->
+	
+	<title>Types on the Middle-layer - Crawl framework</title>
+	
+	<!-- appears in search results -->
+	<meta name="description" content=
+"Types on the Middle-layer of the framework." />
+	
+	<meta name="author" content="David Pasch"/>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>	
+
+	<link rel="stylesheet" href="../styles/article.css"/>
+
+</head>
+
+<body>
+
+<h1>Types on the Middle-layer</h1>
+
+<p><span class="def">Goals:</span></p>
+<ul>
+ <li><em>Plain pass-through:</em> Support for plain transfer of data through framework, ie no modification of data is desired eg downloader.</li>
+ <li><em>Textual content:</em> Distinguished treatment of textual content.</li>
+ <li><em>Simplicity:</em> No proliferation of types to represent all possible types of content.</li>
+</ul>
+
+
+<h2>Approach</h2>
+
+<p>The approach taken is as follows.</p>
+<ul>
+ <li><em>Plain pass-through:</em> Fetched data is handed-out in raw form as binary content.</li>
+ <li><em>Textual content:</em> Use of types to distinguish between textual and binary content.</li>
+ <li><em>Simplicity:</em> Explicit representation of content's type to avoid elaborate interface hierarchy.</li>
+</ul>
+
+
+<h2>System design</h2>
+
+<p>Content is represented by the following types on the middle-layer.</p>
+<figure>
+<img src="media/types-middle_layer.png" alt="Representation of content." 
+  width="400"/>
+<figcaption>Representation of content.</figcaption>
+</figure>
+
+<p>The <code>Content</code> class augments the binary data with it's type
+which is explicitly represented by <code>ContentType</code> (sb).</p>
+
+<p>Textual content is separately represented by <code>TextContent</code>.</p>
+
+<p>The use of the types in the layered architecture is shown below.</p>
+<figure>
+<img src="media/types-layers-middle_layer.png" alt="Types in the layered architecture." 
+  width="500"/>
+<figcaption>Types in the layered architecture.</figcaption>
+</figure>
+
+<p>In this example, one can also see how the plain pass-through is being realized.</p>
+
+
+<h2>Content's type</h2>
+
+<p><span class="def">Problem:</span> The framework needs to know the type of the fetched data for the following purposes.</p>
+<ul>
+  <li><em>Stage acceptance:</em> Definition of an acceptance criterion for the data for processing by a particular stage.</li>
+  <li><em>Normalized file extensions:</em> Normalization of file extensions of the output files.</li>
+</ul>
+
+<p>These needs are met by the <code>ContentType</code> which represents the data's type.</p>
+
+<p><span class="def">Problem:</span> The content's type is represented differently in the web and on the file system.</p>
+<p><span class="def">Goal:</span> Uniform treatment of content independent of it's origin.</p>
+
+<p>In order to achieve this goal, the two different representations are unified in the <code>ContentType</code>.
+In the web, the content's type is provided by the HTTP header <code>Content-Type</code>
+which contains the media type for this purpose.
+On the file system, the content's type is specified by the file's extension.</p>
+
+
+<!--
+
+<h1></h1>
+
+<p></p>
+
+<p>David Pasch, 2020.</p>
+
+<p><b>Tags</b>: Devolution, Parents, Psychology, Egoism, Nietzsche</p>
+
+<p><b>SEO Description</b>:
+</p>
+<br/>
+
+<p></p>
+// non-breaking space
+&nbsp;
+<code></code>
+<em></em>
+<a href=""></a>
+<p><b></b></p>
+<p><span class="def"></span></p>
+<ul>
+  <li></li>
+</ul>
+
+<figure>
+<img src="supplements/ego_women.png" alt="Self-centered women." 
+  width="600"/>
+<figcaption>(photos by Jainner Giron and Eirc Mok)</figcaption>
+</figure>
+
+<h2>Glossary</h2>
+
+<dl>
+  <dt id="def:pipeline"><code>pipeline</code></dt>
+  <dd>Pipeline of the web-crawler incl classes it interacts with on top-layer.</dd>
+</dl>
+
+<h2>References</h2>
+
+<ul>
+ <li id="nietzscheGoetzen1889">Götzendämmerung (<a href="https://en.wikipedia.org/wiki/Twilight_of_the_Idols">Twilight of the Idols</a>). Friedrich Nietzsche, 1889.</li>
+</ul>
+
+-->
+
+</body>
+</html>

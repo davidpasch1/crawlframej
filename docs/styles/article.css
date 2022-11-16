@@ -1,0 +1,41 @@
+/************************************
+ * General stylesheet for articles.
+ *
+ * David Pasch
+ * All rights reserved.
+ */
+
+
+/*******************************
+ * Layout.
+ */
+
+body {
+	width: 20cm;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 2cm;
+	margin-bottom: 2cm;
+}
+
+pre {
+	tab-size: 3;
+}
+
+
+/*******************************
+ * Styleing.
+ */
+
+/* Definition in a glossary.
+ */
+dt {
+	font-weight: bold;
+}
+
+/* Definition.
+ * Eg <>Problem:<>
+ */
+.def {
+	font-weight: bold;
+}
