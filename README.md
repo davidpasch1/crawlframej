@@ -11,7 +11,7 @@ The code is provided as-is to other developers for use in their projects.
 *In general, there are no plans to further extend the framework.*
 In particular, it is unlikely that the known limitations (sb) will be removed.
 
-There might be shortcomings, however, which may be subject to future development (see the wiki).
+There might be shortcomings, however, which may be subject to future development (see Known Issues in the docs).
 
 **Note**: Bug reports and fixes are always welcome.
 
@@ -48,6 +48,7 @@ Because it is intended for simple web-crawlers, it's performance is not an impor
 - The core of the framework.
 - Collection of stages for the fetcher and the processing pipeline.
 - Demo of a general crawler and a downloader.
+- Specification of the framework.
 
 The framework is delivered in two modules:
 - the core framework (`crawlframej-core`)
