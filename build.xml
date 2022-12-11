@@ -134,7 +134,7 @@
   </target>
 
 
- <target name="dist" description="assemble application" depends="compileAll, apidocAll">
+  <target name="dist" description="assemble application" depends="compileAll, apidocAll">
  
     <copy todir="${dist_lib}">
       <path refid="cp-logging-jars"/>
