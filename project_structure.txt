@@ -1,12 +1,12 @@
-logging					# Encapsulates and extends logger implementation.
-httpclient				# Encapsulates HTTP client implementation.
+logging						# Encapsulates and extends logger implementation.
+httpclient					# Encapsulates HTTP client implementation.
 crawlframe-core			# Crawling framework - top-layer.
-crawlframe-stages		# Crawling framework - middle- and bottom-layers.
-conf_data/				# config for assembly, javadoc
-shared/					# resources shared by java projects
-  build_script/  		# shared build_script
+crawlframe-stages			# Crawling framework - middle- and bottom-layers.
+conf_data/					# config for assembly, javadoc
+shared/						# resources shared by java projects
+  build_script/  			# shared build_script
     build_project.xml	# base build_script for individual project with default targets
-  lib/					# global shared libraries eg apache commons
-    jars/				# libraries jars
-    docs/				# libraries javadocs
-docs/					# specs
+  lib/						# global shared libraries eg apache commons
+    jars/					# libraries jars
+    docs/					# libraries javadocs
+docs/							# specs
